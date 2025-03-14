@@ -49,7 +49,3 @@ print("\n========== AI Therapist Output ==========")
 print("User Info:", user_info)
 print("Pose Analysis:", pose_description)
 print("AI Feedback:", ai_feedback)
-
-# 输出错误信息（如果有）
-if response.stderr:
-    print("\nSTDERR:", response.stderr.strip())  
