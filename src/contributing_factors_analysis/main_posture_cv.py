@@ -91,7 +91,7 @@ class PostureAnalysis:
 
         # Delete the image folder after analysis
         # print(self.img_path)
-        # self.capture.delete_folder()
+        self.capture.delete_folder()
 
         return saggital_result
 
