@@ -1,18 +1,14 @@
+import os
 import torch
 import torch.nn as nn
-import sys
-import os
-import dailylife_data_simulator as ds
 # Get the absolute path of the contributing_factors_analysis directory
 
 # Now import the module
 # import posture_computer_vision.image_capture as capture
-import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, LabelEncoder
-from main_posture_cv import PostureAnalysis
-from dailylife_data_simulator import WearableSimulator
+from sklearn.preprocessing import StandardScaler
+from contributing_factors_analysis.main_posture_cv import PostureAnalysis
+from contributing_factors_analysis.dailylife_data_simulator import WearableSimulator
 
 
 # Import the necessary modules (Assuming 'capture', 'fp', and 'sp' are classes you have)
@@ -48,8 +44,15 @@ def analyze_lifestyle(user_data):
     user_data_scaled = scaler.transform(user_data_np)
 
     # ✅ Load the trained model
+
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    src_dir = os.path.dirname(current_dir)
+    github_final_dir = os.path.dirname(src_dir)
+    model_path = os.path.join(github_final_dir, "models", "lifestyle_nn.pth")
+    model_path = os.path.normpath(model_path)
+
     model = LifestyleNN(input_size=6, num_classes=4)
-    model.load_state_dict(torch.load("../../models/lifestyle_nn.pth"))
+    model.load_state_dict(torch.load(model_path))
     model.eval()
     
     # ✅ Convert to tensor and make predictions
@@ -73,8 +76,4 @@ def retrieve_final_result():
     postureAnalysis = PostureAnalysis()
     result1 = analyze_lifestyle(data)
     result2 = postureAnalysis.generate_posture_final_result()
-    print(f"Final result:  {result2 + " " + result2}")
     return result1 + " " + result2
-
-
-retrieve_final_result()

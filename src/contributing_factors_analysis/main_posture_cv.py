@@ -6,9 +6,9 @@ from dotenv import load_dotenv
 # from image_capture import WebcamCapture  # Webcam image capture
 # from frontal_plane_static import FrontalPlanePostureAnalyzer  # Frontal posture analysis
 # from saggital_plane_static import SaggitalPlanePostureAnalyzer  # Saggital posture analysis
-from image_capture import WebcamCapture  # Webcam image capture
-from frontal_plane_static import FrontalPlanePostureAnalyzer  # Frontal posture analysis
-from saggital_plane_static import SaggitalPlanePostureAnalyzer  # Saggital posture analysis
+from contributing_factors_analysis.image_capture import WebcamCapture  # Webcam image capture
+from contributing_factors_analysis.frontal_plane_static import FrontalPlanePostureAnalyzer  # Frontal posture analysis
+from contributing_factors_analysis.saggital_plane_static import SaggitalPlanePostureAnalyzer  # Saggital posture analysis
 
 
 class PostureAnalysis:
@@ -46,10 +46,8 @@ class PostureAnalysis:
 
         # Process images and analyze posture
         image_data_list = analyzer.image_process()
-        print(f"Image data: {image_data_list}")
 
         average_result = analyzer.average_image_data(image_data_list)
-        print(f"Average result: {average_result}")
 
         if average_result:
             (shoulder_diff, hip_diff, knee_angle_left, knee_angle_right) = average_result
@@ -76,10 +74,8 @@ class PostureAnalysis:
 
         # Process images and analyze posture
         image_data_list = analyzer.image_process()
-        print(f"Image data: {image_data_list}")
 
         average_posture, hip_right, knee_right = analyzer.average_image_data(image_data_list)
-        print(f"Average data: {average_posture}, {hip_right}, {knee_right}")
 
         if average_posture:
             forward_head, rounded_shoulders, pelvic_tilt, knee_hyperextension = average_posture
@@ -90,7 +86,6 @@ class PostureAnalysis:
             saggital_result = None
 
         # Delete the image folder after analysis
-        # print(self.img_path)
         self.capture.delete_folder()
 
         return saggital_result
@@ -103,20 +98,11 @@ class PostureAnalysis:
 
         frontal_joint_changes, frontal_muscle_deficit = self.start_frontal_posture_analysis()
         saggital_joint_changes, saggital_muscle_deficit = self.start_saggital_posture_analysis()
-        # print("--------------------------")
-        # print(type(saggital_muscle_deficit))
-        # print(type(saggital_joint_changes))
-        # print(saggital_joint_changes)
-        # print(saggital_muscle_deficit)
-        # print("--------------------------")
         final_deficit_muscles.update(self.remove_duplication(frontal_muscle_deficit))
         final_deficit_muscles.update(self.remove_duplication(saggital_muscle_deficit))
 
         final_joint_changes.update(self.remove_duplication(frontal_joint_changes))
         final_joint_changes.update(self.remove_duplication(saggital_joint_changes))
-
-        print(f"Final Deficit Muscles: {final_deficit_muscles}")
-        print(f"Final Joint Changes: {final_joint_changes}")
 
         string_joint_changes = ", ".join(final_joint_changes) if final_joint_changes else "No detected joint issues."
         string_muscle_deficit = ", ".join(final_deficit_muscles) if final_deficit_muscles else "No detected muscle weaknesses."
@@ -139,7 +125,6 @@ class PostureAnalysis:
         result = set()
         for item in original_list:
             cleaned_items = self.process_muscle_string(item)
-            print(f"Cleaned Items: {cleaned_items}")
             result.update(cleaned_items)
         return result
 

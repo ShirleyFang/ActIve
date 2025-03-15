@@ -21,7 +21,6 @@ class FrontalPlanePostureAnalyzer:
         angle = np.abs(radians * 180.0 / np.pi)
         if angle > 180.0:
             angle = 360 - angle
-        print(f"Angle: {angle}")
         return angle
 
     def image_analysis(self, img_path):
@@ -120,12 +119,6 @@ class FrontalPlanePostureAnalyzer:
         if knee_angle_right < 165:  
             final_muscle_deficit.append(angle_muscle_map["right_knee_valgus"])
             final_joint_changes.append("Right Knee Valgus")
-
-        string_muscle_deficit = ", ".join(final_muscle_deficit)
-        string_joint_changes = ", ".join(final_joint_changes)
-
-        print(string_joint_changes)
-        print(string_muscle_deficit)
 
         return final_joint_changes, final_muscle_deficit
 

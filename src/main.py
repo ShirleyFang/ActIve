@@ -1,13 +1,15 @@
 from user_info.user import User
 from llm_model.ollama_model import OllamaModel
+from contributing_factors_analysis.combine_daliylife_and_cv import retrieve_final_result
 
 # Initialize user
 user = User()
 user_info = user.get_user_info()
 
-pose_description = "Joint angles deviations based on posture analysis: anterior pelvic tilt and right shoulder elevation. Muscle imbalances to work on: rectus femoris, erector spinae, right lower trapezius, pectoralis minor."
+# Initialize and get data from CV model
+pose_description = retrieve_final_result()
 
-# Initialize OllamaModel
+# Initialize llama Model
 ollama = OllamaModel()
 
 # Output Results

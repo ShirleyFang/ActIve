@@ -143,18 +143,15 @@ class SaggitalPlanePostureAnalyzer:
         # Pass hip_right and knee_right to the function
         muscles_to_strengthen = self.recommend_muscles(forward_head, rounded_shoulders, pelvic_tilt, knee_hyperextension, hip_right, knee_right)
 
-        if final_issues:
-            string_joint_changes = ", ".join(final_issues)
-            print(string_joint_changes)
-        else:
-            string_joint_changes = "No significant postural deviations detected."
-            print(string_joint_changes)
+        # if final_issues:
+        #     string_joint_changes = ", ".join(final_issues)
+        # else:
+        #     string_joint_changes = "No significant postural deviations detected."
 
-        if muscles_to_strengthen:
-            string_muscle_deficit = ", ".join(muscles_to_strengthen)
-            print(string_muscle_deficit)
-        else:
-            string_muscle_deficit = "No significant muscle imbalances detected."
+        # if muscles_to_strengthen:
+        #     string_muscle_deficit = ", ".join(muscles_to_strengthen)
+        # else:
+        #     string_muscle_deficit = "No significant muscle imbalances detected."
 
         return final_issues, muscles_to_strengthen
 
