@@ -24,19 +24,19 @@ class OllamaModel:
 
     def analyze_muscle_distribution(self, pose_description):
         """
-        Step 1: Analyze posture deviations and determine training time per muscle group.
+        Step 1: Analyze posture deviations and determine the priority of muscle groups.
         
         Returns:
-            JSON string containing muscle training time distribution.
+            string containing muscle training priority analysis.
         """
         prompt = f"""
-        You are an expert physical therapist. Analyze the user's posture deviations and assign an optimal training ratio.
+        You are an expert physical therapist. Analyze the user's posture deviations and prioritize the muscle groups that need training.
 
         🔹 **Posture Analysis Report:**
             - {pose_description}
 
-        🔹 **Training Time Distribution:** (Total = 100%)
-            - Assign **specific percentages** to each muscle group based on its importance in posture correction.
+        🔹 **Muscle Priority Analysis:**
+            - Prioritize each muscle group based on its importance in posture correction.
             - Example Output Format(the order shows priority):
                 1. gluteus_maximus
                 2. transversus_abdominis
