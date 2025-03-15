@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import sys
 import os
-import dailylife_factors.dailylife_data_simulator as ds
+import dailylife_data_simulator as ds
 # Get the absolute path of the contributing_factors_analysis directory
 
 # Now import the module
@@ -11,7 +11,10 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder
-from posture_computer_vision.main_posture_cv import PostureAnalysis
+from main_posture_cv import PostureAnalysis
+from dailylife_data_simulator import WearableSimulator
+
+
 # Import the necessary modules (Assuming 'capture', 'fp', and 'sp' are classes you have)
 
 class LifestyleNN(nn.Module):
@@ -62,15 +65,16 @@ def analyze_lifestyle(user_data):
     return weakness_labels[predicted_class]
 
 
-def retrive_user_data():
-    wearable = ds.WearableSimulator()
+def retrieve_final_result():
+    wearable = WearableSimulator()
 
     # Get and print wearable device data
     data = wearable.get_data()
     postureAnalysis = PostureAnalysis()
     result1 = analyze_lifestyle(data)
     result2 = postureAnalysis.generate_posture_final_result()
-    print(result1)
-    return result1
+    print(f"Final result:  {result2 + " " + result2}")
+    return result1 + " " + result2
 
 
+retrieve_final_result()

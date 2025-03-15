@@ -60,7 +60,7 @@ class FrontalPlanePostureAnalyzer:
 
     def image_process(self):
         """Process multiple images from the user folder."""
-        image_path = "../data/img/user/"
+        image_path = "user/"
         image_data_list = []
 
         for i in range(1):
@@ -130,17 +130,4 @@ class FrontalPlanePostureAnalyzer:
         return final_joint_changes, final_muscle_deficit
 
 
-# # Create an instance of PostureAnalyzer
-# analyzer = FrontalPlanePostureAnalyzer()
 
-# # Process images and extract posture data
-# image_data = analyzer.image_process()
-
-# # Compute the average posture analysis
-# if image_data:
-#     avg_results = analyzer.average_image_data(image_data)
-#     print("\n📊 Average Posture Data:", avg_results)
-
-#     # Analyze muscle weaknesses based on detected posture issues
-#     if avg_results:
-#         analyzer.angle_diff_to_muscle(*avg_results)

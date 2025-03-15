@@ -4,11 +4,10 @@ import shutil
 import time
 
 class WebcamCapture:
-    def __init__(self, save_dir="../data/img/user", num_images=1):
+    def __init__(self, save_dir="user", num_images=1):
         """Initialize webcam capture settings."""
         self.save_dir = save_dir
         self.num_images = num_images
-        os.makedirs(self.save_dir, exist_ok=True)
 
     def countdown(self, seconds):
         """Countdown before capturing a photo."""
@@ -21,6 +20,7 @@ class WebcamCapture:
         print("📸 Capturing photo now!")
 
     def capture_images(self):
+        os.makedirs(self.save_dir, exist_ok=True)
         """Captures multiple images from the webcam and saves them."""
         cap = cv2.VideoCapture(0)  # Open default webcam
         if not cap.isOpened():
@@ -46,11 +46,18 @@ class WebcamCapture:
 
     def delete_folder(self):
         """Deletes the entire folder and its contents."""
+        folder_path = "user"
         try:
-            if os.path.exists(self.save_dir):
-                shutil.rmtree(self.save_dir)
-                print(f"🗑 Folder '{self.save_dir}' deleted successfully!")
+            if os.path.exists(folder_path):
+                shutil.rmtree(folder_path)
+                print(f"Deleted folder: {folder_path}")
             else:
-                print(f"⚠ Warning: Folder '{self.save_dir}' not found.")
+                print(f"Folder does not exist: {folder_path}")
         except Exception as e:
             print(f"❌ Error deleting folder: {e}")
+
+
+
+
+# cp = WebcamCapture()
+# cp.delete_folder()

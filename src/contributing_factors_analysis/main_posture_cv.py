@@ -27,7 +27,7 @@ class PostureAnalysis:
     Thank you for your cooperation!  
     """
 
-    def __init__(self, img_path="../data/img/user/"):
+    def __init__(self, img_path="data/img/user/"):
         """Initialize posture analysis settings."""
         load_dotenv()
         self.img_path = img_path
@@ -58,9 +58,9 @@ class PostureAnalysis:
         else:
             print("No result")
             frontal_result = None
-
+        print(self.img_path)
         # Delete the image folder after analysis
-        # self.capture.delete_folder(self.img_path)
+        self.capture.delete_folder()
         
         return frontal_result
 
@@ -90,7 +90,8 @@ class PostureAnalysis:
             saggital_result = None
 
         # Delete the image folder after analysis
-        self.capture.delete_folder(self.img_path)
+        # print(self.img_path)
+        # self.capture.delete_folder()
 
         return saggital_result
 
@@ -142,9 +143,7 @@ class PostureAnalysis:
             result.update(cleaned_items)
         return result
 
+# if __name__ == '__main__':
+# analyzor = PostureAnalysis()
+# analyzor.generate_posture_final_result()
 
-# Example Usage:
-# if __name__ == "__main__":
-#     analyzer = PostureAnalysis()
-#     final_result = analyzer.generate_posture_final_result()
-#     print("\n🔍 Final Posture Analysis Result:\n", final_result)

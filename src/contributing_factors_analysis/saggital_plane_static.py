@@ -2,11 +2,11 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import os
-import image_capture as capture  # Webcam image capture
+# import image_capture as capture  # Webcam image capture
 
 
 class SaggitalPlanePostureAnalyzer:
-    def __init__(self, num_photos=1, image_path="../data/img/user/"):
+    def __init__(self, num_photos=1, image_path="user/"):
         """Initialize MediaPipe Pose Estimation and Image Processing Configs."""
         self.mp_pose = mp.solutions.pose
         self.pose = self.mp_pose.Pose(static_image_mode=True)
@@ -158,22 +158,3 @@ class SaggitalPlanePostureAnalyzer:
 
         return final_issues, muscles_to_strengthen
 
-# analyzer = SaggitalPlanePostureAnalyzer(num_photos=1)
-
-# # Process images (Make sure you have images in "../data/img/user/")
-# image_data_list = analyzer.image_process()
-# print(f"Image Data List: {image_data_list}")
-
-# # Compute the average posture data
-# if image_data_list:
-#     average_posture, hip_right, knee_right = analyzer.average_image_data(image_data_list)
-#     print(f"\n📊 Average Posture Data: {average_posture}")
-#     print(f"📌 Hip Right: {hip_right}, Knee Right: {knee_right}")
-
-#     # Perform postural analysis
-#     if average_posture:
-#         forward_head, rounded_shoulders, pelvic_tilt, knee_hyperextension = average_posture
-#         result = analyzer.postural_analysis(forward_head, rounded_shoulders, pelvic_tilt, knee_hyperextension, hip_right, knee_right)
-#         print("\n🔍 Postural Analysis Result:", result)
-# else:
-#     print("❌ No images processed.")
