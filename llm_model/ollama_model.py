@@ -37,11 +37,11 @@ class OllamaModel:
 
         🔹 **Training Time Distribution:** (Total = 100%)
             - Assign **specific percentages** to each muscle group based on its importance in posture correction.
-            - Example Output Format:
-                gluteus_maximus: 40%
-                transversus_abdominis: 30%
-                left_gluteus_medius: 20%
-                hip_flexors: 10%
+            - Example Output Format(the order shows priority):
+                1. gluteus_maximus
+                2. transversus_abdominis
+                3. left_gluteus_medius
+                4. hip_flexors
         """
 
         response = self._generate_response(prompt)
@@ -64,13 +64,13 @@ class OllamaModel:
 
         🔹 **Exercise Plan** 
         ```
-        1️⃣ **Gluteus Maximus (40%)**
+        1️⃣ **Gluteus Maximus**
            - **Exercise:** Hip Thrusts
            - **Sets & Reps:** 4 sets × 12 reps
            - **Rest Time:** 60 seconds
            - **Correction Tip:** Engage core to stabilize pelvis.
 
-        2️⃣ **Transversus Abdominis (30%)**
+        2️⃣ **Transversus Abdominis**
            - **Exercise:** Dead Bugs
            - **Sets & Reps:** 3 sets × 15 reps
            - **Rest Time:** 45 seconds
@@ -91,6 +91,10 @@ class OllamaModel:
             return response.stdout.strip()
         except subprocess.CalledProcessError as e:
             return f"❌ AI Generation Error: {e}"
+
+
+
+
 
 
 
