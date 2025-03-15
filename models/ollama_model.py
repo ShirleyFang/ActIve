@@ -1,7 +1,7 @@
 import subprocess
 
 class OllamaModel:
-    """Handles AI-generated feedback using Ollama."""
+    """Handles AI-generated feedback using Ollama in two-step processing."""
 
     def __init__(self, model_name="llama3.1:8b"):
         """
@@ -22,46 +22,68 @@ class OllamaModel:
         except subprocess.CalledProcessError as e:
             print(f"❌ Failed to load model {self.model_name}: {e}")
 
-    def generate_feedback(self, user_info, pose_description):
+    def analyze_muscle_distribution(self, pose_description):
         """
-        Generates AI feedback based on user information and pose analysis.
-        - Trims overly long prompts to optimize response time.
-        - Limits response tokens to speed up inference.
-
-        Args:
-            user_info (str): Formatted user description.
-            pose_description (str): Analysis from MediaPipe.
-            max_tokens (int): Limits token output to speed up response time.
-
+        Step 1: Analyze posture deviations and determine training time per muscle group.
+        
         Returns:
-            str: AI-generated feedback.
+            JSON string containing muscle training time distribution.
         """
-        # Reduce prompt length for faster execution
+        prompt = f"""
+        You are an expert physical therapist. Analyze the user's posture deviations and assign an optimal training ratio.
 
-        prompt = (
-            f"You are an expert physical therapist. A user has shared their posture and fitness details with you.\n"
-            f"Your response should be structured as follows:\n\n"
-            f"1️⃣ **Posture Analysis:**\n"
-            f"   - Identify potential muscle weaknesses or imbalances.\n"
-            f"   - Explain why poor posture occurs in this case.\n\n"
-            f"2️⃣ **Muscle & Joint Impact:**\n"
-            f"   - Discuss which muscle groups are affected (e.g., weak core, tight hamstrings).\n"
-            f"   - Provide scientific reasoning for why these issues arise.\n\n"
-            f"3️⃣ **Personalized Corrective Plan:**\n"
-            f"   - Suggest a **detailed** corrective exercise plan.\n"
-            f"   - Include sets, reps, and frequency.\n\n"
-            f"4️⃣ **Posture & Habit Correction:**\n"
-            f"   - Provide actionable tips on how the user can improve their daily routine.\n"
-            f"   - Suggest ergonomic improvements for their workspace.\n\n"
-            f"5️⃣ **Expected Results & Timeline:**\n"
-            f"   - Explain how long it may take to see improvements.\n"
-            f"   - Set realistic expectations.\n\n"
-            f"User Info:\n{user_info}\n\n"
-            f"Pose Analysis:\n{pose_description}\n\n"
-        )
+        🔹 **Posture Analysis Report:**
+            - {pose_description}
+
+        🔹 **Training Time Distribution:** (Total = 100%)
+            - Assign **specific percentages** to each muscle group based on its importance in posture correction.
+            - Example Output Format:
+                gluteus_maximus: 40%
+                transversus_abdominis: 30%
+                left_gluteus_medius: 20%
+                hip_flexors: 10%
+        """
+
+        response = self._generate_response(prompt)
+        
+        return response
+
+    def generate_training_plan(self, user_info, muscle_distribution):
+        """
+        Step 2: Generate a personalized training plan based on muscle group analysis.
+        """
+        prompt = f"""
+        You are a professional physical therapist. Based on the user's posture analysis and optimal muscle training ratio, create a **detailed** personalized exercise plan.
+        Here's the information you need, user_info: {user_info} and muscle_analysis {muscle_distribution}.
+
+        🔹 **Exercise Plan Requirements:**
+            - Assign **specific exercises** for each muscle group.
+            - Define **sets, reps, and rest intervals**.
+            - Suggest **corrective posture tips** to integrate into daily life.
+            - Provide a **step-by-step structured response**.
+
+        🔹 **Exercise Plan** 
+        ```
+        1️⃣ **Gluteus Maximus (40%)**
+           - **Exercise:** Hip Thrusts
+           - **Sets & Reps:** 4 sets × 12 reps
+           - **Rest Time:** 60 seconds
+           - **Correction Tip:** Engage core to stabilize pelvis.
+
+        2️⃣ **Transversus Abdominis (30%)**
+           - **Exercise:** Dead Bugs
+           - **Sets & Reps:** 3 sets × 15 reps
+           - **Rest Time:** 45 seconds
+           - **Correction Tip:** Keep lower back neutral.
+        ```
+        """
+        return self._generate_response(prompt)
+
+    def _generate_response(self, prompt):
+        """Handles interaction with Ollama."""
         try:
             response = subprocess.run(
-                ["ollama", "run", self.model_name, prompt], 
+                ["ollama", "run", self.model_name, prompt],
                 capture_output=True,
                 text=True,
                 encoding="utf-8"
@@ -69,5 +91,6 @@ class OllamaModel:
             return response.stdout.strip()
         except subprocess.CalledProcessError as e:
             return f"❌ AI Generation Error: {e}"
+
 
 
