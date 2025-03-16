@@ -8,6 +8,7 @@ user_info = user.get_user_info()
 
 # Initialize and get data from CV model
 pose_description = retrieve_final_result()
+pose_description = ""
 
 # Initialize llama Model
 ollama = OllamaModel()
@@ -28,3 +29,4 @@ print("\n🏋️ **Step 2 - Final Training Plan:**")
 training_plan = ollama.generate_training_plan(user_info, muscle_distribution)
 
 print(training_plan)
+
