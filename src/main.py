@@ -28,4 +28,4 @@ print("\n🏋️ **Step 2 - Final Training Plan:**")
 training_plan = ollama.generate_training_plan(user_info, muscle_distribution)
 
 print(training_plan)
-
+print("\n⚠️ Disclaimer: This AI application does not provide professional medical advice. Consult a healthcare provider for personalized recommendations.")
