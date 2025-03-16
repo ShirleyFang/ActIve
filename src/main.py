@@ -8,7 +8,6 @@ user_info = user.get_user_info()
 
 # Initialize and get data from CV model
 pose_description = retrieve_final_result()
-pose_description = ""
 
 # Initialize llama Model
 ollama = OllamaModel()
@@ -16,8 +15,8 @@ ollama = OllamaModel()
 # Output Results
 print("\n========== AI Therapist Output ==========")
 print("User Info:", user_info)
-print("Pose Analysis:", pose_description)
-print("\n🔥 **Step 1 - Muscle Distribution Analysis:**")
+# print("Pose Analysis:", pose_description)
+print("\n🔥 **Step 1 - Muscle Priority Analysis:**")
 
 # 🔹 Step 1: AI analyzes muscle training distribution
 muscle_distribution = ollama.analyze_muscle_distribution(pose_description)

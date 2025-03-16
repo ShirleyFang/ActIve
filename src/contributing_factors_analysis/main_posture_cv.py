@@ -48,7 +48,7 @@ class PostureAnalysis:
         print(self.CAMERA_MESSAGE)
         
         # Capture images using the external capture module
-        # self.capture.capture_images()
+        self.capture.capture_images()
 
         # Create an instance of the FrontalPlanePostureAnalyzer class
         analyzer = FrontalPlanePostureAnalyzer()

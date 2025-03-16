@@ -3,13 +3,14 @@ import subprocess
 class OllamaModel:
     """Handles AI-generated feedback using Ollama in two-step processing."""
 
-    def __init__(self, model_name="llama3.1:8b"):
+    def __init__(self, model_name="llama3.2:1b"):
         """
         Initialize the model.
         - Ensures the model is preloaded before any requests.
         """
         self.model_name = model_name
-        self._ensure_model_loaded()
+        print(f"✅ Model {self.model_name} loaded successfully!")
+        # self._ensure_model_loaded()
 
     def _ensure_model_loaded(self):
         """
@@ -30,18 +31,15 @@ class OllamaModel:
             string containing muscle training priority analysis.
         """
         prompt = f"""
-        You are an expert physical therapist. Analyze the user's posture deviations and prioritize the muscle groups that need training.
-
-        🔹 **Posture Analysis Report:**
-            - {pose_description}
+        You are an expert physical therapist. Given{pose_description} Analyze the user's posture deviations and prioritize the Top3 muscle groups that need training.
+        Return ONLY the following format (no extra text):
 
         🔹 **Muscle Priority Analysis:**
-            - Prioritize each muscle group based on its importance in posture correction.
+            - Prioritize top3 muscle group based on its importance in posture correction.
             - Example Output Format(the order shows priority):
                 1. gluteus_maximus
                 2. transversus_abdominis
                 3. left_gluteus_medius
-                4. hip_flexors
         """
 
         response = self._generate_response(prompt)
@@ -64,6 +62,7 @@ class OllamaModel:
 
         🔹 **Exercise Plan** 
         ```
+            Day 1:
         1️⃣ **Gluteus Maximus**
            - **Exercise:** Hip Thrusts
            - **Sets & Reps:** 4 sets × 12 reps
@@ -75,6 +74,7 @@ class OllamaModel:
            - **Sets & Reps:** 3 sets × 15 reps
            - **Rest Time:** 45 seconds
            - **Correction Tip:** Keep lower back neutral.
+        
         ```
         """
         return self._generate_response(prompt)
