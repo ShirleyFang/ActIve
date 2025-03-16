@@ -55,19 +55,33 @@ class FrontalPlanePostureAnalyzer:
             return (shoulder_diff, hip_diff, knee_angle_left, knee_angle_right)
         else:
             print("No pose detected in the image.")
+            # TODO: add the exit()
             return None
 
     def image_process(self):
         """Process multiple images from the user folder."""
-        image_path = "user/"
+        image_path = "contributing_factors_analysis/user/"
         image_data_list = []
+        full_path = os.path.join(image_path, "image_1.jpg")  # 确保路径正确 ✅
+        full_path = os.path.abspath(full_path)  # 转换为绝对路径 ✅
+        print(f"full_path: {full_path}")
+        print(f"📸 处理图像: {full_path}")
+        
+        
 
-        for i in range(1):
-            full_image_path = os.path.join(image_path, f"image_{i+1}.jpg")
-            curr_result = self.image_analysis(full_image_path)
-            if curr_result:
-                image_data_list.append(curr_result)
 
+            # Convert to RGB
+        curr_result = self.image_analysis(full_path)
+
+        print("Image conversion successful!")
+
+        # for i in range(1):
+        #     full_image_path = os.path.join(image_path, f"image_{i+1}.jpg")
+        #     print(f"full_image_path: {full_image_path}")
+        #     curr_result = self.image_analysis(full_image_path)
+        #     if curr_result:
+        #         image_data_list.append(curr_result)
+        image_data_list.append(curr_result)
         return image_data_list
 
     def average_image_data(self, image_data_list):

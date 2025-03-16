@@ -15,8 +15,8 @@ ollama = OllamaModel()
 # Output Results
 print("\n========== AI Therapist Output ==========")
 print("User Info:", user_info)
-print("Pose Analysis:", pose_description)
-print("\n🔥 **Step 1 - Muscle Distribution Analysis:**")
+# print("Pose Analysis:", pose_description)
+print("\n🔥 **Step 1 - Muscle Priority Analysis:**")
 
 # 🔹 Step 1: AI analyzes muscle training distribution
 muscle_distribution = ollama.analyze_muscle_distribution(pose_description)
@@ -28,3 +28,4 @@ print("\n🏋️ **Step 2 - Final Training Plan:**")
 training_plan = ollama.generate_training_plan(user_info, muscle_distribution)
 
 print(training_plan)
+

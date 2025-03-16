@@ -69,11 +69,12 @@ def analyze_lifestyle(user_data):
 
 
 def retrieve_final_result():
-    wearable = WearableSimulator()
+    # wearable = WearableSimulator()
 
     # Get and print wearable device data
-    data = wearable.get_data()
+    # data = wearable.get_data()
     postureAnalysis = PostureAnalysis()
-    result1 = analyze_lifestyle(data)
+    result1 = ""
+    # result1 = analyze_lifestyle(data)
     result2 = postureAnalysis.generate_posture_final_result()
     return result1 + " " + result2

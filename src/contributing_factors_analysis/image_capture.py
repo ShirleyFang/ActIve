@@ -4,7 +4,7 @@ import shutil
 import time
 
 class WebcamCapture:
-    def __init__(self, save_dir="user", num_images=1):
+    def __init__(self, save_dir="contributing_factors_analysis/user", num_images=1):
         """Initialize webcam capture settings."""
         self.save_dir = save_dir
         self.num_images = num_images
@@ -35,7 +35,7 @@ class WebcamCapture:
             if not ret:
                 print(f"⚠ Failed to capture image {i+1}")
                 continue
-
+            print(self.save_dir)
             img_path = os.path.join(self.save_dir, f"image_{i+1}.jpg")
             cv2.imwrite(img_path, frame)
 

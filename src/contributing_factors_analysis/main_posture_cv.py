@@ -1,14 +1,23 @@
 import os
 import re
-from dotenv import load_dotenv
+import socket
 
 # Import the necessary modules (Assuming 'capture', 'fp', and 'sp' are classes you have)
-# from image_capture import WebcamCapture  # Webcam image capture
-# from frontal_plane_static import FrontalPlanePostureAnalyzer  # Frontal posture analysis
-# from saggital_plane_static import SaggitalPlanePostureAnalyzer  # Saggital posture analysis
+# try:
+#     socket.setdefaulttimeout(timeout=3)
+#     socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
+#     from image_capture import WebcamCapture  # Webcam image capture
+#     from frontal_plane_static import FrontalPlanePostureAnalyzer  # Frontal posture analysis
+#     from saggital_plane_static import SaggitalPlanePostureAnalyzer  # Saggital posture analysis
+# except socket.error:
+#     from contributing_factors_analysis.image_capture import WebcamCapture  # Webcam image capture
+#     from contributing_factors_analysis.frontal_plane_static2 import FrontalPlanePostureAnalyzer  # Frontal posture analysis
+#     from contributing_factors_analysis.saggital_plane_static2 import SaggitalPlanePostureAnalyzer  # Saggital posture analysis
+
+# 
 from contributing_factors_analysis.image_capture import WebcamCapture  # Webcam image capture
-from contributing_factors_analysis.frontal_plane_static import FrontalPlanePostureAnalyzer  # Frontal posture analysis
-from contributing_factors_analysis.saggital_plane_static import SaggitalPlanePostureAnalyzer  # Saggital posture analysis
+from contributing_factors_analysis.frontal_plane_static2 import FrontalPlanePostureAnalyzer  # Frontal posture analysis
+from contributing_factors_analysis.saggital_plane_static2 import SaggitalPlanePostureAnalyzer  # Saggital posture analysis
 
 
 class PostureAnalysis:
@@ -29,7 +38,7 @@ class PostureAnalysis:
 
     def __init__(self, img_path="data/img/user/"):
         """Initialize posture analysis settings."""
-        load_dotenv()
+        # load_dotenv()
         self.img_path = img_path
         self.capture = WebcamCapture()
         
@@ -58,7 +67,7 @@ class PostureAnalysis:
             frontal_result = None
         print(self.img_path)
         # Delete the image folder after analysis
-        self.capture.delete_folder()
+        # self.capture.delete_folder()
         
         return frontal_result
 
@@ -67,7 +76,7 @@ class PostureAnalysis:
         print(self.CAMERA_MESSAGE)
 
         # Capture images using the external capture module
-        self.capture.capture_images()
+        # self.capture.capture_images()
 
         # Create an instance of the SaggitalPlanePostureAnalyzer class
         analyzer = SaggitalPlanePostureAnalyzer()
@@ -86,7 +95,7 @@ class PostureAnalysis:
             saggital_result = None
 
         # Delete the image folder after analysis
-        self.capture.delete_folder()
+        # self.capture.delete_folder()
 
         return saggital_result
 
@@ -95,7 +104,7 @@ class PostureAnalysis:
         """Runs both frontal and saggital posture analyses and combines results."""
         final_deficit_muscles = set()
         final_joint_changes = set()
-
+        
         frontal_joint_changes, frontal_muscle_deficit = self.start_frontal_posture_analysis()
         saggital_joint_changes, saggital_muscle_deficit = self.start_saggital_posture_analysis()
         final_deficit_muscles.update(self.remove_duplication(frontal_muscle_deficit))
@@ -106,7 +115,7 @@ class PostureAnalysis:
 
         string_joint_changes = ", ".join(final_joint_changes) if final_joint_changes else "No detected joint issues."
         string_muscle_deficit = ", ".join(final_deficit_muscles) if final_deficit_muscles else "No detected muscle weaknesses."
-
+        print(string_muscle_deficit + " " + string_joint_changes)
         return string_muscle_deficit + " " + string_joint_changes
 
     @staticmethod
