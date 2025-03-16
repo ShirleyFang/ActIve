@@ -21,7 +21,7 @@ The **AI Physical Therapist** is an **on-device AI application** designed to hel
 - Factors considered: sleep duration, sitting duration, daily steps & activity levels, heart rate, etc.
 - This data is **fed into a neural network (LifestyleNN)** that predicts **potential muscle weaknesses** based on lifestyle habits.
 
-### **Step 3: Muscle Weakness Priority Ranking (LLM)** 🏆  
+**Step 3: Muscle Weakness Priority Ranking (LLM)** 🏆  
 - The **first LLM (Llama v3.1-8B-Chat)** takes the **pose analysis results + wearable data output** and determines:  
 - **Which muscle groups require the most attention** for rehabilitation.  
 - **Priority ranking of muscles** that need targeted exercise for posture correction.
