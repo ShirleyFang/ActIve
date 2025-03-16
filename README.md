@@ -2,17 +2,19 @@
 
 ## Description
 
-The **AI Physical Therapist** is an **on-device AI application** designed to help users improve their posture and prevent muscle imbalances through **real-time posture analysis** and **personalized exercise recommendations**. This application runs entirely on **Snapdragon X Elite Copilot+ PC**, ensuring **offline functionality and privacy protection**.
+The **ActIve** is an **on-device AI application** for the purpose of **personalied exercise generation**. It is designed to help users improve their posture and prevent muscle imbalances through **real-time posture analysis** and **personalized exercise recommendations** using personal factors. This application runs entirely on **Snapdragon X Elite Copilot+ PC** without internet, ensuring **offline functionality and privacy protection**.
+
+![ActIve Workflow](./workflow.jpg)
 
 ### Key Features
 
 - **Posture Analysis (MediaPipe)**: Detects **postural imbalances** using real-time pose estimation from a webcam.
 - **Wearable Data Integration**: Simulates real-world wearable device metrics (eventually we hope we can use real data as part of our application).
-- **LLM-Powered Physical Therapy (Llama v3.1-8B-Chat)**: Generates **muscle imbalance priority ranking** and a **step-by-step corrective exercise plan**.
+- **LLM-Powered Personalized Exercise Generator (Llama v3.2-1B-Chat)**: Generates **muscle imbalance priority ranking** and a **step-by-step corrective exercise plan**.
 - **On-Device AI Processing**: Utilizes **ONNX Runtime & ollama** to run Llama models **fully offline**.
 - **Privacy-Preserving & Edge AI**: No internet connection is required—**all user data remains local**.
 
-### 🛠How It Works
+### How It Works
 
 **Step 1: Posture Detection** 📸
 
@@ -26,11 +28,12 @@ The **AI Physical Therapist** is an **on-device AI application** designed to hel
 - The system simulates **wearable device metrics** (or retrieves real-world sensor data) to **enhance posture analysis**.
 - Factors considered: sleep duration, sitting duration, daily steps & activity levels, heart rate, etc.
 - This data is **fed into a neural network (LifestyleNN)** that predicts **potential muscle weaknesses** based on lifestyle habits.
+- This portion is still under development
 
 **Step 3: Muscle Weakness Priority Ranking (LLM)** 🏆
 
-- The **first LLM (Llama v3.1-8B-Chat)** takes the previous output and determines:
-- **Which muscle groups require the most attention** for rehabilitation.
+- The **first LLM (Llama v3.2-1B-Chat)** takes the previous output and determines:
+- **Which muscle groups require the most attention** for strengthening.
 - **Priority ranking of muscles** that need targeted exercise for posture correction.
 
 **Step 4: Personalized Exercise Plan Generation** 🏋️
