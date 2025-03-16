@@ -39,16 +39,95 @@ The **AI Physical Therapist** is an **on-device AI application** designed to hel
 - ollama                # Ollama CLI for AI model interaction
 
 
-## How to Run:
-1. Clone the repository:
-    - git clone <repository-link>
-2. Configure virual environment (Optional):
-    - python -m venv venv
-    - source venv/bin/activate
-3. Install required dependencies:
-    - pip3 install opencv-python mediapipe numpy
-4. Run the program:
-    - python3 XXXXX or python XXXXXX
+## Installation Guide (Snapdragon X Elite)
+
+This guide ensures **ActIve** runs smoothly on **Snapdragon X Elite Copilot+ PC**.
+
+### 1. Prerequisites
+
+Before installing, ensure your system has:
+
+- **Python 3.10+**
+- **pip (latest version)**
+- **Git**
+- **Ollama CLI (Windows ARM64)**
+- **ONNX Runtime (Qualcomm QNN)**
+- **MediaPipe ONNX (Qualcomm AI Hub)**
+- **OpenCV (headless, no GUI)**
+
+---
+
+### 2. Clone the Repository
+
+```sh
+git clone <repository-link>
+cd Active_version2
+```
+### 3. Set Up the Environment
+Choose between using a virtual environment (recommended) or installing dependencies globally.
+
+- **Option 1: Virtual Environment (Recommended)**
+```sh
+python -m venv venv
+```
+Activate the virtual environment
+- Windows (CMD / PowerShell)
+```sh
+venv\Scripts\activate
+```
+- Windows (Git Bash)
+```sh
+source venv/Scripts/activate
+```
+- **Option 2: Install Globally**
+
+If you prefer not to use a virtual environment, skip activation and proceed to the next step.
+
+### 4. Install Dependencies
+Run the following command to install all required dependencies:
+
+```sh
+pip install opencv-python-headless onnxruntime-qnn numpy torch
+```
+What’s Included?
+- **onnxruntime-qnn** → Qualcomm-optimized ONNX Runtime
+- **opencv-python-headless** → OpenCV without GUI dependencies (for better ARM64 compatibility)
+- **numpy** → Numerical computing
+- **torch** → PyTorch for AI model execution
+
+### 5. Install MediaPipe ONNX (Qualcomm AI Hub)
+Qualcomm's MediaPipe ONNX is not available via pip. It must be downloaded manually:
+
+1. Visit the Qualcomm AI Hub
+👉 [Download MediaPipe ONNX](https://aihub.qualcomm.com/models/mediapipe_pose?searchTerm=mediapipe)
+2. Download mediapipe.onnx and place it inside the models/ directory.
+
+### 6. Install Ollama (Windows ARM64)
+1. Download Ollama for Windows ARM64
+👉 [Download Ollama](https://ollama.com/)
+2. Install Ollama
+3. Verify the installation:
+
+```sh
+ollama --version
+```
+4. Pull the Llama 3.1 model:
+```sh
+ollama pull llama3.1:8b
+```
+
+### 7. Run the Application
+Start ActIve
+
+```sh
+python main.py
+```
+What it does:
+
+- Captures real-time posture data using a webcam
+- Analyzes postural deviations with MediaPipe ONNX
+- Predicts muscle imbalances via LifestyleNN
+- Generates a customized corrective exercise plan using Llama 3.1 AI
 
 ### License:
     This project is for educational and research purposes only.
