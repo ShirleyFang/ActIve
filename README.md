@@ -4,9 +4,9 @@ The **AI Physical Therapist** is an **on-device AI application** designed to hel
 
 ### Key Features
 - **Posture Analysis (MediaPipe)**: Detects **postural imbalances** using real-time pose estimation from a webcam.
-- **Wearable Data Integration**: Simulates real-world wearable device metrics such as **daily activity, sitting duration, sleep patterns, heart rate**, and **stress levels**.
+- **Wearable Data Integration**: Simulates real-world wearable device metrics (eventually we hope we can use real data as part of our application).
 - **LLM-Powered Physical Therapy (Llama v3.1-8B-Chat)**: Generates **muscle imbalance priority ranking** and a **step-by-step corrective exercise plan**.
-- **On-Device AI Processing**: Utilizes **ONNX Runtime with QNN Execution Provider** to run Llama models **fully offline** with Qualcomm AI acceleration.
+- **On-Device AI Processing**: Utilizes **ONNX Runtime & ollama** to run Llama models **fully offline**.
 - **Privacy-Preserving & Edge AI**: No internet connection is required—**all user data remains local**.
 
 ### 🛠How It Works
