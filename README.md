@@ -68,7 +68,7 @@ Before installing, ensure your system has:
 ### 2. Clone the Repository
 
 ```sh
-git clone <repository-link>
+git clone https://github.com/ShirleyFang/ActIve.git
 cd Active_version2
 ```
 
@@ -126,10 +126,10 @@ What’s Included?
 ollama --version
 ```
 
-4. Pull the Llama 3.1 model:
+4. Pull the Llama 3.2 model:
 
 ```sh
-ollama pull llama3.1:8b
+ollama pull llama3.2:1b
 ```
 
 ### 6. Run the Application
@@ -146,7 +146,7 @@ What it does:
 - Captures real-time posture data using a webcam
 - Analyzes postural deviations with MediaPipe ONNX
 - Predicts muscle imbalances via LifestyleNN
-- Generates a customized corrective exercise plan using Llama 3.1 AI
+- Generates a customized corrective exercise plan using Llama 3.2 AI
 
 ### License:
 
